@@ -1,0 +1,26 @@
+.bg-container {
+  background-color: #272727;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.not-found-image {
+  height: 300px;
+  width: 350px;
+  margin-bottom: 20px;
+}
+.not-found-heading {
+  font-family: 'Roboto';
+  font-size: 50px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+.text {
+  font-family: 'Roboto';
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+}
