@@ -38,7 +38,7 @@
   flex-direction: column;
   padding: 20px;
   border-radius: 7px;
-  background-color: #7e858e;
+  background-color: grey;
   min-height: 100vh;
 }
 .first-part {
@@ -57,24 +57,24 @@
 .title {
   font-family: 'Roboto';
   font-size: 20px;
-  color: #cbd5e1;
+  color: #ffffff;
   font-weight: bold;
 }
 .description-head {
   font-family: 'Roboto';
   font-size: 30px;
-  color: #cbd5e1;
+  color: #ffffff;
   font-weight: bold;
 }
 .job-description {
   font-family: 'Roboto';
   font-size: 17px;
-  color: #cbd5e1;
+  color: #ffffff;
 }
 .rating {
   font-family: 'Roboto';
   font-size: 15px;
-  color: #cbd5e1;
+  color: #ffffff;
   font-weight: bold;
 }
 .company-logo {
@@ -109,7 +109,7 @@ star {
   margin-right: 5px;
 }
 .hr-line {
-  color: #f8fafc;
+  color: white;
   width: 100%;
   padding: 5px;
 }
@@ -137,6 +137,7 @@ star {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-right: 30px;
 }
 .skills-image {
   height: 40px;

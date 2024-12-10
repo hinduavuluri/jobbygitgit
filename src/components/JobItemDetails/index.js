@@ -45,25 +45,25 @@ class JobItemDetails extends Component {
     const response = await fetch(jobsUrl, jobOptions)
     if (response.ok === true) {
       const fetchedData = await response.json()
-      const updatedJobData = fetchedData.job_details.map(eachItem => ({
-        companyLogoUrl: eachItem.company_logo_url,
-        companyWebsiteUrl: eachItem.company_website_url,
-        employmentType: eachItem.employment_type,
-        id: eachItem.id,
-        jobDescription: eachItem.job_description,
-        title: eachItem.title,
-        skills: eachItem.skills.map(eachSkill => ({
+      const updatedJobData = {
+        companyLogoUrl: fetchedData.job_details.company_logo_url,
+        companyWebsiteUrl: fetchedData.job_details.company_website_url,
+        employmentType: fetchedData.job_details.employment_type,
+        id: fetchedData.job_details.id,
+        jobDescription: fetchedData.job_details.job_description,
+        title: fetchedData.job_details.title,
+        skills: fetchedData.job_details.skills.map(eachSkill => ({
           imageUrl: eachSkill.image_url,
           name: eachSkill.name,
         })),
         lifeAtCompany: {
-          decsription: eachItem.life_at_company.description,
-          imageUrl: eachItem.life_at_company.image_url,
+          description: fetchedData.job_details.life_at_company.description,
+          imageUrl: fetchedData.job_details.life_at_company.image_url,
         },
-        location: eachItem.location,
-        packagePerAnnum: eachItem.package_per_annum,
-        rating: eachItem.rating,
-      }))
+        location: fetchedData.job_details.location,
+        packagePerAnnum: fetchedData.job_details.package_per_annum,
+        rating: fetchedData.job_details.rating,
+      }
 
       const updatedSimilarJobsData = fetchedData.similar_jobs.map(eachItem => ({
         employmentType: eachItem.employment_type,
@@ -114,98 +114,95 @@ class JobItemDetails extends Component {
 
   renderSuccessView = () => {
     const {jobDataDetails, similarJobsData} = this.state
-    if (jobDataDetails.length >= 1) {
-      const {
-        companyLogoUrl,
-        companyWebsiteUrl,
-        employmentType,
-        jobDescription,
-        lifeAtCompany,
-        location,
-        packagePerAnnum,
-        rating,
-        skills,
-        title,
-      } = jobDataDetails[0]
-      return (
-        <>
-          <div className="job-details-container">
-            <div className="first-part">
-              <div className="image-item">
-                <img
-                  src={companyLogoUrl}
-                  className="company-logo"
-                  alt="job details company logo"
-                />
-                <div className="type-rating">
-                  <h1 className="title">{title}</h1>
-                  <div className="rating-star">
-                    <AiFillStar className="star" />
-                    <p className="rating">{rating}</p>
-                  </div>
+    const {
+      companyLogoUrl,
+      companyWebsiteUrl,
+      employmentType,
+      jobDescription,
+      lifeAtCompany,
+      location,
+      packagePerAnnum,
+      rating,
+      skills,
+      title,
+    } = jobDataDetails
+    return (
+      <>
+        <div className="job-details-container">
+          <div className="first-part">
+            <div className="image-item">
+              <img
+                src={companyLogoUrl}
+                className="company-logo"
+                alt="job details company logo"
+              />
+              <div className="type-rating">
+                <h1 className="title">{title}</h1>
+                <div className="rating-star">
+                  <AiFillStar className="star" />
+                  <p className="rating">{rating}</p>
                 </div>
-              </div>
-              <div className="location-type">
-                <div className="start-part">
-                  <div>
-                    <MdLocationOn />
-                    <p className="text">{location}</p>
-                  </div>
-                  <div>
-                    <IoBagHandleOutline />
-                    <p className="text">{employmentType}</p>
-                  </div>
-                </div>
-                <p className="rating">{packagePerAnnum}</p>
               </div>
             </div>
-            <hr className="hr-line" />
-            <div className="second-part">
-              <div className="link">
-                <h1 className="description-head">Description</h1>
-                <a href={companyWebsiteUrl} className="visit-anchor">
-                  Visit <FaExternalLinkAlt />
-                </a>
+            <div className="location-type">
+              <div className="start-part">
+                <div>
+                  <MdLocationOn />
+                  <p className="text">{location}</p>
+                </div>
+                <div>
+                  <IoBagHandleOutline />
+                  <p className="text">{employmentType}</p>
+                </div>
               </div>
-              <p className="job-description">{jobDescription}</p>
-              <h1>Skills</h1>
-              <ul className="skills-list">
-                {skills.map(eachItem => (
-                  <li key={eachItem.name} className="li-job-details-container">
-                    <img
-                      alt={eachItem.name}
-                      src={eachItem.imageUrl}
-                      className="skills-image"
-                    />
-                    <p className="job-description">{eachItem.name}</p>
-                  </li>
-                ))}
-              </ul>
-              <h1>Life at Company</h1>
-              <div className="life-at-company-container">
-                <p className="job-description">{lifeAtCompany.description}</p>
-                <img
-                  src={lifeAtCompany.imageUrl}
-                  alt="life at company"
-                  className="life-at-company"
-                />
-              </div>
+              <p className="rating">{packagePerAnnum}</p>
             </div>
           </div>
-          <h1>Similar Jobs</h1>
-          <ul className="similar-jobs-list-container">
-            {similarJobsData.map(eachItem => (
-              <SimilarJobs
-                key={eachItem.id}
-                similarJobsData={eachItem}
-                employmentType={employmentType}
+          <hr className="hr-line" />
+          <div className="second-part">
+            <div className="link">
+              <h1 className="description-head">Description</h1>
+              <a href={companyWebsiteUrl} className="visit-anchor">
+                Visit <FaExternalLinkAlt />
+              </a>
+            </div>
+            <p className="job-description">{jobDescription}</p>
+            <h1>Skills</h1>
+            <ul className="skills-list">
+              {skills.map(eachItem => (
+                <li key={eachItem.name} className="li-job-details-container">
+                  <img
+                    alt={eachItem.name}
+                    src={eachItem.imageUrl}
+                    className="skills-image"
+                  />
+                  <p className="job-description">{eachItem.name}</p>
+                </li>
+              ))}
+            </ul>
+            <h1>Life at Company</h1>
+            <div className="life-at-company-container">
+              <p className="job-description">{lifeAtCompany.description}</p>
+              <img
+                src={lifeAtCompany.imageUrl}
+                alt="life at company"
+                className="life-at-company"
               />
-            ))}
-          </ul>
-        </>
-      )
-    }
-    return null
+            </div>
+          </div>
+        </div>
+        <h1>Similar Jobs</h1>
+        <ul className="similar-jobs-list-container">
+          {similarJobsData.map(eachItem => (
+            <SimilarJobs
+              key={eachItem.id}
+              similarJobsData={eachItem}
+              employmentType={employmentType}
+            />
+          ))}
+        </ul>
+      </>
+    )
   }
 
   renderJobDetailsView = () => {

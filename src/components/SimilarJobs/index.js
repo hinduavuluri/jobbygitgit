@@ -4,14 +4,14 @@ import {MdLocationOn} from 'react-icons/md'
 import './index.css'
 
 const SimilarJobs = props => {
-  const {similarJobData, employmentType} = props
+  const {similarJobsData, employmentType} = props
   const {
     companyLogoUrl,
     jobDescription,
     location,
     rating,
     title,
-  } = similarJobData
+  } = similarJobsData
   return (
     <li>
       <div className="similar-jobs-container">
