@@ -193,7 +193,7 @@ class Jobs extends Component {
       eachItem => eachItem === event.target.id,
     )
     if (inputNotInList.length === 0) {
-      this.seState(
+      this.setState(
         prevState => ({
           checkboxInputs: [...prevState.checkboxInputs, event.target.id],
         }),
